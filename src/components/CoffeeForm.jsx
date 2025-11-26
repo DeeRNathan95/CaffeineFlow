@@ -1,28 +1,38 @@
 import { coffeeOptions } from '../utils';
+import {useState} from 'react';
 
 export default function CoffeeForm() {
+    const [selectedCoffee, setselectedCoffee] = useState(null);
+    const [showCoffeeTypes, setShowCoffeeTypes] = useState(false);
+
     return (
         <>
         <div className="section-header">
             <i className="fa-solid fa-pencil"></i>
             <h2>Start Tracking Today</h2>
         </div>
-        <h4>Select cofee type</h4>
+        <h4>Select coffee type</h4>
         <div className="coffee-grid">
             {coffeeOptions.slice(0, 5).map((option, optionIndex) => {
                 return (
-                    <button className='button-card' key={optionIndex}>
+                    <button onClick={() => {
+                      setselectedCoffee(option.name)  
+                      setShowCoffeeTypes(false);
+                    }} className={'button-card' + (option.name === selectedCoffee ? ' coffee-button-selected' : ' ')} key={optionIndex}>
                         <h4>{option.name}</h4>
                         <p>{option.caffeine} mg</p>
                     </button>
                 )
             })}
-            <button className='button-card'>
-                <h4>Other</h4>
-                <p>n/a</p>
-                </button>
+           <button onClick={() => {setShowCoffeeTypes(true)}}
+           className={'button-card' + (showCoffeeTypes ? ' coffee-button-selected' : ' ')}
+                    >
+            <h4>Other</h4>
+            <p>n/a</p>
+            </button>
         </div>
-        <select id="coffee-list" name="coffee-list">
+        {showCoffeeTypes && (
+            <select id="coffee-list" name="coffee-list">
             <option value="null">Select type</option>
             {coffeeOptions.map((option, optionIndex) => {
                 return (
@@ -32,6 +42,7 @@ export default function CoffeeForm() {
                 )
             })}
             </select>
+        )}
             <h4>Add the cost (CHF)</h4>
             <input className='w-full' type='numebr' placeholder='4.50' />
             <h4>Time since consumption</h4>

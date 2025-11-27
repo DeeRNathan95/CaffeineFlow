@@ -2,9 +2,15 @@ import { coffeeOptions } from '../utils';
 import {useState} from 'react';
 
 export default function CoffeeForm() {
-    const [selectedCoffee, setselectedCoffee] = useState(null);
+    const [selectedCoffee, setSelectedCoffee] = useState(null);
     const [showCoffeeTypes, setShowCoffeeTypes] = useState(false);
-
+    const [coffeeCost, setCoffeeCost] = useState(0);
+    const[hour, setHour] = useState(0);
+    const[min, setMin] = useState(0);
+    
+    function HandleSubmitForm() {
+        console.log(selectedCoffee, coffeeCost, hour, min);
+    }
     return (
         <>
         <div className="section-header">
@@ -16,7 +22,7 @@ export default function CoffeeForm() {
             {coffeeOptions.slice(0, 5).map((option, optionIndex) => {
                 return (
                     <button onClick={() => {
-                      setselectedCoffee(option.name)  
+                     setSelectedCoffee(option.name)  
                       setShowCoffeeTypes(false);
                     }} className={'button-card' + (option.name === selectedCoffee ? ' coffee-button-selected' : ' ')} key={optionIndex}>
                         <h4>{option.name}</h4>
@@ -24,7 +30,10 @@ export default function CoffeeForm() {
                     </button>
                 )
             })}
-           <button onClick={() => {setShowCoffeeTypes(true)}}
+           <button onClick={() => {
+            setShowCoffeeTypes(true) 
+            setSelectedCoffee(null)
+        }}
            className={'button-card' + (showCoffeeTypes ? ' coffee-button-selected' : ' ')}
                     >
             <h4>Other</h4>
@@ -32,7 +41,9 @@ export default function CoffeeForm() {
             </button>
         </div>
         {showCoffeeTypes && (
-            <select id="coffee-list" name="coffee-list">
+            <select onChange={(e) => {
+                setSelectedCoffee(e.target.value)
+            }} id="coffee-list" name="coffee-list">
             <option value="null">Select type</option>
             {coffeeOptions.map((option, optionIndex) => {
                 return (
@@ -44,12 +55,16 @@ export default function CoffeeForm() {
             </select>
         )}
             <h4>Add the cost (CHF)</h4>
-            <input className='w-full' type='numebr' placeholder='4.50' />
+            <input className='w-full' type='number' value={coffeeCost} onChange={(e) => {
+                setCoffeeCost(e.target.value)
+            }} placeholder='4.50' />
             <h4>Time since consumption</h4>
             <div className='time-entry'>
                 <div>
                     <h6>Hours</h6>
-                    <select id='hours-select'>
+                    <select onChange={(e) => {
+                        setHour(e.target.value)
+                    }} id='hours-select'>
                         {[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23].map((hour, hourIndex
                         ) => {
                             return (
@@ -62,7 +77,9 @@ export default function CoffeeForm() {
                 </div>
                 <div>
                     <h6>Mins</h6>
-                    <select id='mins-select'>
+                    <select onChange={(e) => {
+                        setMin(e.target.value)
+                    }} id='mins-select'>
                         {[0, 5, 10, 15, 30, 45].map((min, minIndex
                         ) => {
                             return (
@@ -74,7 +91,7 @@ export default function CoffeeForm() {
                     </select>
                 </div>
             </div>
-            <button>
+            <button onClick={HandleSubmitForm}>
                 <p>Add Entry</p>
             </button>
 

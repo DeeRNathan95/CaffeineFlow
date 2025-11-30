@@ -1,11 +1,19 @@
-import CoffeeForm from './components/CoffeeForm.jsx'
-import Hero from './components/Hero.jsx'
-import History from './components/History.jsx'
-import Layout from './components/Layout.jsx'
-import Stats from './components/Stats.jsx'
+import CoffeeForm from "./components/CoffeeForm"
+import Hero from "./components/Hero"
+import History from "./components/History"
+import Layout from "./components/Layout"
+import Stats from "./components/Stats"
+import { useAuth } from "./context/AuthContext"
+import { coffeeConsumptionHistory } from "./utils"
+
+
 function App() {
  
-  const isAuthenticated = false
+  const { globalUser, isLoading, globalData } = useAuth()
+  console.log("Current user:", globalUser);
+
+  const isAuthenticated = !!globalUser
+  const isData = globalData && !!Object.keys(globalData || {}).length
 
   const authenticatedContent = (
     <>
@@ -18,7 +26,10 @@ function App() {
     <Layout>
       <Hero />
       <CoffeeForm isAuthenticated={isAuthenticated} />
-      {isAuthenticated && (authenticatedContent  )}
+      {(isAuthenticated && isLoading) && (
+        <p>Loading data...</p>
+      )}
+      {(isAuthenticated && isData) && (authenticatedContent)}
     </Layout>
   )
 }

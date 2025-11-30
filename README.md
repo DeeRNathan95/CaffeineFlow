@@ -1,16 +1,59 @@
-# React + Vite
+# ☕ CaffeineFlow — Coffee Consumption Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Demo:** [https://caffeineflow.webstudiobydee.com](https://caffeineflow.webstudiobydee.com)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Overview
 
-## React Compiler
+CaffeineFlow is a **ReactJS + Firebase** application designed to help coffee lovers track their daily caffeine intake, costs, and consumption habits.  
+It combines **authentication, Firestore database integration, and dynamic stats** to provide personalized insights into your coffee journey.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project demonstrates full‑stack integration with Firebase, secure user authentication, and real‑time database updates — all deployed on a custom subdomain via Hostinger.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+- **Frontend:** ReactJS (Vite)
+- **Styling:** Tailwind CSS + custom styles (`fanta.css`)
+- **State Management:** React Context API + Hooks (`useState`, `useEffect`)
+- **Backend:** Firebase Authentication & Firestore Database
+- **Deployment:** Hostinger (subdomain: `caffeineflow.webstudiobydee.com`)
+
+---
+
+## 🚀 Features
+
+- 🔑 **User Authentication** — Sign up, log in, and manage sessions securely with Firebase Auth.
+- 📝 **Add Coffee Entries** — Track coffee type, size, price, and time since consumption.
+- 📊 **Statistics Dashboard** — View active caffeine levels, daily totals, averages, and costs.
+- 📈 **History Tracking** — See past entries with breakdowns by coffee type and percentage.
+- 🔒 **Firestore Integration** — Data stored per user with secure Firestore rules.
+- 🎨 **Responsive UI** — Clean, mobile‑friendly design with Tailwind CSS.
+
+---
+
+🎯 What I Practiced
+- Structuring a React project with reusable components
+- Managing authentication and global state with Context API
+- Writing secure Firestore rules for per‑user data
+- Deploying Firebase‑linked apps on static hosting (Hostinger)
+- Styling with Tailwind CSS and custom design tweaks
+
+---
+
+## 🔐 Firebase Setup
+
+Environment variables are stored in `.env` (ignored in Git):
+
+```env
+VITE_FIREBASE_APIKEY=your_api_key
+VITE_FIREBASE_AUTHDOMAIN=your_auth_domain
+VITE_FIREBASE_PROJECTID=your_project_id
+VITE_FIREBASE_STORAGEBUCKET=your_storage_bucket
+VITE_FIREBASE_MESSAGINGSENDERID=your_sender_id
+VITE_FIREBASE_APPID=your_app_id
+
+
+
